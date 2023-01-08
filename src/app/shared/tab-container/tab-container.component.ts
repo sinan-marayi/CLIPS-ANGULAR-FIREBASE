@@ -17,7 +17,6 @@ export class TabContainerComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent> =
     new QueryList();
   ngAfterContentInit(): void {
-    console.log(this.tabs);
     this.selectTab(this.tabs.first);
   }
 
