@@ -5,10 +5,12 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 
 @NgModule({
   declarations: [AuthModalComponent, LoginComponent, RegisterComponent],
-  imports: [CommonModule, ReactiveFormsModule, SharedModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SharedModule,FormsModule,AngularFirestoreModule],
   exports: [AuthModalComponent],
 })
 export class UserModule {}
