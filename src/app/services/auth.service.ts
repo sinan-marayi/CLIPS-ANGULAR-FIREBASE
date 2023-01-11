@@ -5,8 +5,9 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import IUser from '../models/user.modal';
-import { Observable } from 'rxjs';
-import { map,delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, delay, filter, switchMap } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,28 @@ import { map,delay } from 'rxjs/operators';
 export class AuthService {
   private userCollection: AngularFirestoreCollection<IUser>;
   isAuthenticated$: Observable<boolean>;
-isAuthenticatedWithDelay$:Observable<boolean>
+  isAuthenticatedWithDelay$: Observable<boolean>;
+  isRedirect = false;
 
-  constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
+  constructor(
+    private auth: AngularFireAuth,
+    private db: AngularFirestore,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.userCollection = this.db.collection('users');
     this.isAuthenticated$ = auth.user.pipe(map((user) => !!user));
-this.isAuthenticatedWithDelay$=this.isAuthenticated$.pipe(delay(1000))
+    this.isAuthenticatedWithDelay$ = this.isAuthenticated$.pipe(delay(1000));
+    router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map((e) => this.route.firstChild),
+        switchMap((data) => data?.data ?? of({}))
+      )
+      .subscribe((data) => (this.isRedirect = data.authOnly ?? false));
   }
+
+  //ToCreateUser
   public async createUser(userData: IUser) {
     const userCred = await this.auth.createUserWithEmailAndPassword(
       userData.email as string,
@@ -34,5 +50,15 @@ this.isAuthenticatedWithDelay$=this.isAuthenticated$.pipe(delay(1000))
       age: userData.age,
     });
     await userCred.user?.updateProfile({ displayName: userData.name });
+  }
+  //ToLogout
+  async logout($event?: Event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+    await this.auth.signOut();
+    if (this.isRedirect) {
+      await this.router.navigateByUrl('/');
+    }
   }
 }

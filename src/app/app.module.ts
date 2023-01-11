@@ -10,9 +10,12 @@ import { UserModule } from './user/user.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { VideosModule } from './videos/videos.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, HomeComponent, AboutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +24,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    VideosModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
