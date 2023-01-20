@@ -11,6 +11,6 @@ import { EventBlockerDirective } from './directives/event-blocker.directive';
 @NgModule({
   declarations: [ModalComponent, TabContainerComponent, TabComponent, InputComponent, AlertComponent, EventBlockerDirective],
   imports: [CommonModule,ReactiveFormsModule],
-  exports: [ModalComponent,TabContainerComponent,TabComponent,InputComponent,AlertComponent],
+  exports: [ModalComponent,TabContainerComponent,TabComponent,InputComponent,AlertComponent,EventBlockerDirective],
 })
 export class SharedModule {}
