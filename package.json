@@ -23,8 +23,6 @@
     "@ffmpeg/ffmpeg": "^0.11.6",
     "@types/node": "^18.11.18",
     "@types/uuid": "^9.0.0",
-    "@types/video.js": "^7.3.51",
-    "@videogular/ngx-videogular": "^7.0.1",
     "@videojs/themes": "^1.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

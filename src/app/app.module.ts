@@ -17,10 +17,6 @@ import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ClipsListComponent } from './clips-list/clips-list.component';
 import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
-import {VgCoreModule} from '@videogular/ngx-videogular/core';
-import {VgControlsModule} from '@videogular/ngx-videogular/controls';
-import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
-import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 
 
 @NgModule({
@@ -43,11 +39,6 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule
-
   ],
   providers: [],
   bootstrap: [AppComponent],
