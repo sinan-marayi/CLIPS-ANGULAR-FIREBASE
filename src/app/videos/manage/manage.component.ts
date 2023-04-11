@@ -33,7 +33,7 @@ export class ManageComponent implements OnInit {
           ...doc.data(),
         });
       });
-      
+
     });
   }
 
@@ -70,5 +70,15 @@ export class ManageComponent implements OnInit {
         this.clips.splice(index, 1);
       }
     });
+  }
+  //copyTheUrl
+  copyToClipboard($event: MouseEvent, docID: string | undefined) {
+    if (!docID) {
+      return
+    }
+    const url = `${location.origin}/clip/${docID}`
+    // console.log(url)
+    navigator.clipboard.writeText(url)
+alert('The link is copied to clipboard')
   }
 }
